@@ -1,13 +1,13 @@
 
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 
-// Initialize AI with API key
+
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
 
 async function getAiAnalysis(lead, offer) {
   // Select model
-  const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-latest" });
 
   // Prepare the prompt text
   const prompt = `

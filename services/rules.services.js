@@ -1,51 +1,31 @@
-
-
 function calculateRuleScore(lead, offer) {
   let score = 0;
 
-  // Convert role and industry to lowercase (for easy matching)
+  // Rule 1: Role Relevance
   const role = lead.role.toLowerCase();
+  const decisionMakers = ['ceo', 'founder', 'vp', 'head of', 'director'];
+  const influencers = ['manager', 'lead', 'senior'];
+  if (decisionMakers.some(dm => role.includes(dm))) {
+    score += 20;
+  } else if (influencers.some(inf => role.includes(inf))) {
+    score += 10;
+  }
+
+  // Rule 2: Industry Match
   const industry = lead.industry.toLowerCase();
-
-  // Rule 1: Role relevance
-  const decisionMakers = ["ceo", "founder", "vp", "head of", "director"];
-  const influencers = ["manager", "lead", "senior"];
-
-  // Check if role includes decision maker
-  for (let dm of decisionMakers) {
-    if (role.includes(dm)) {
-      score += 20;
-      break; // no need to check further
-    }
+  if (offer.ideal_use_cases.some(icp => industry.includes(icp.toLowerCase()))) {
+    score += 20;
   }
 
-  // If not decision maker, then check influencers
-  if (score === 0) {
-    for (let inf of influencers) {
-      if (role.includes(inf)) {
-        score += 10;
-        break;
-      }
-    }
-  }
+  // Rule 3: Data Completeness (Corrected Logic)
+  const requiredFields = ['name', 'role', 'company', 'industry', 'location', 'linkedin_bio'];
+  const isComplete = requiredFields.every(field => {
+    const value = lead[field];
+    // Check if the value exists and, after converting to a string and trimming, is not empty.
+    return value != null && String(value).trim() !== '';
+  });
 
-  // Rule 2: Industry match
-  for (let icp of offer.ideal_use_cases) {
-    if (industry.includes(icp.toLowerCase())) {
-      score += 20;
-      break;
-    }
-  }
-
-  // Rule 3: Data completeness (all fields filled)
-  let allFilled = true;
-  for (let key in lead) {
-    if (!lead[key] || lead[key].trim() === "") {
-      allFilled = false;
-      break;
-    }
-  }
-  if (allFilled) {
+  if (isComplete) {
     score += 10;
   }
 
