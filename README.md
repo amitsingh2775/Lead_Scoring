@@ -1,6 +1,6 @@
-# Lead Scoring API Service 🚀
+# Lead Scoring 
 
-This is a backend service built for a hiring assignment. It accepts product details and a CSV of business leads, then scores each lead's buying intent using a hybrid model that combines a rule-based engine and AI-powered reasoning from the Google Gemini API. The service is built with Node.js, Express, and MongoDB, and is deployed on Render.
+This is a backend service built for lead scoring. It accepts product details and a CSV of business leads, then scores each lead's buying intent using a hybrid model that combines a rule-based engine and AI-powered reasoning from the Google Gemini API. The service is built with Node.js, Express, and MongoDB, and is deployed on Render.
 
 ---
 
@@ -56,13 +56,14 @@ This endpoint saves the product/offer details that will be used for scoring the 
 This endpoint accepts a CSV file containing leads. It clears any previously uploaded leads and results.
 
 * **Endpoint**: `POST /leads/upload`
+* it should be like <img width="1338" height="182" alt="image" src="https://github.com/user-attachments/assets/52313a05-a50a-4ad1-9fb6-dd551a9bc096" />
+
 * **Request Body**: `form-data`
     * **Key**: `file`
     * **Value**: Your `.csv` file. The CSV must have the columns: `name,role,company,industry,location,linkedin_bio`.
 * **cURL Example**:
     ```bash
-    curl -X POST [https://lead-scoring-1.onrender.com/api/v1/leads/upload](https://lead-scoring-1.onrender.com/api/v1/leads/upload) \
-    -F "file=@/path/to/your/leads.csv"
+   https://lead-scoring-1.onrender.com/api/v1/leads/upload
     ```
 
 ### 3. Run Scoring Process
@@ -72,7 +73,7 @@ This endpoint triggers the scoring pipeline. It processes all uploaded leads aga
 * **Endpoint**: `POST /score`
 * **cURL Example**:
     ```bash
-    curl -X POST [https://lead-scoring-1.onrender.com/api/v1/score](https://lead-scoring-1.onrender.com/api/v1/score)
+   https://lead-scoring-1.onrender.com/api/v1/score
     ```
 
 ### 4. Get Scored Results (JSON)
@@ -82,7 +83,7 @@ This endpoint retrieves the list of all scored leads in JSON format.
 * **Endpoint**: `GET /results`
 * **cURL Example**:
     ```bash
-    curl -X GET [https://lead-scoring-1.onrender.com/api/v1/results](https://lead-scoring-1.onrender.com/api/v1/results)
+   https://lead-scoring-1.onrender.com/api/v1/results
     ```
 
 ### 5. Export Results as CSV (Bonus)
@@ -93,7 +94,7 @@ This endpoint downloads the scored results as a `scored_leads.csv` file.
 * **cURL Example**:
     ```bash
     # This command downloads the file and saves it as scored_leads.csv
-    curl -X GET [https://lead-scoring-1.onrender.com/api/v1/results/export](https://lead-scoring-1.onrender.com/api/v1/results/export) -o scored_leads.csv
+    https://lead-scoring-1.onrender.com/api/v1/results/export
     ```
 
 ### 6. Reset Database
@@ -103,7 +104,7 @@ This utility endpoint clears all data from the `offers`, `leads`, and `scoredLea
 * **Endpoint**: `POST /reset`
 * **cURL Example**:
     ```bash
-    curl -X POST [https://lead-scoring-1.onrender.com/api/v1/reset](https://lead-scoring-1.onrender.com/api/v1/reset)
+   https://lead-scoring-1.onrender.com/api/v1/reset
     ```
 
 ---
@@ -114,8 +115,8 @@ To run this project on your local machine, follow these steps:
 
 1.  **Clone the repository:**
     ```bash
-    git clone <your-repo-url>
-    cd <project-directory>
+    git clone https://github.com/amitsingh2775/Lead_Scoring
+    cd Lead_Scoring
     ```
 
 2.  **Install dependencies:**
@@ -136,7 +137,7 @@ To run this project on your local machine, follow these steps:
     ```bash
     npm run dev
     ```
-    The server will start on `http://localhost:3000`.
+    The server will start on `http://localhost:8000`.
 
 ---
 
@@ -149,7 +150,19 @@ To run this project on your local machine, follow these steps:
 
 ---
 
-## 🧠 Scoring Logic Explanation
+## testing Images
+  <img width="1745" height="922" alt="image" src="https://github.com/user-attachments/assets/e9b2b330-25d3-4759-9870-88ea86c168a9" />
+  <img width="1714" height="874" alt="image" src="https://github.com/user-attachments/assets/f253aef9-4ece-430a-91cd-5ec5e9ac44c9" />
+  <img width="1719" height="836" alt="image" src="https://github.com/user-attachments/assets/ab0979d1-49a7-4969-91db-a9c32cdff386" />
+  <img width="1756" height="907" alt="image" src="https://github.com/user-attachments/assets/70a7ffda-0cc3-4d8f-bbd5-3baf73257f52" />
+  <img width="1912" height="1038" alt="image" src="https://github.com/user-attachments/assets/3d8d2614-a7bc-4139-9e3d-b7a6ea54474d" />
+
+
+
+
+
+
+## Scoring Logic Explanation
 
 Each lead is scored out of 100 points, broken down into two layers:
 
