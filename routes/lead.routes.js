@@ -12,6 +12,6 @@ router.post('/leads/upload', upload.single('file'), controller.uploadLeads);
 router.post('/score', controller.scoreLeads);
 router.get('/results', controller.getResults);
 router.get('/results/export', controller.exportResults); 
-router.post("reset",controller.resetDatabase)
+router.post("/reset",controller.resetDatabase)
 
 module.exports = router;

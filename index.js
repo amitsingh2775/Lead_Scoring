@@ -14,7 +14,7 @@ app.use(express.json());
 
 app.use("/api/v1",leadRoutes)
 app.get('/', (req, res) => {
-  res.send('Lead Scoring API is running. Check /api/v1/... endpoints');
+  res.send('Lead Scoring API is running.');
 });
 
 // Start the server
