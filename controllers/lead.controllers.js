@@ -150,3 +150,16 @@ exports.exportResults = async (req, res) => {
     res.status(500).json({ message: 'Server error during CSV export.', error });
   }
 };
+
+// reset data
+exports.resetDatabase = async (req, res) => {
+  try {
+    // Delete all data from all relevant collections
+    await Offer.deleteMany({});
+    await Lead.deleteMany({});
+    await ScoredLead.deleteMany({});
+    res.status(200).json({ message: 'Database has been reset successfully.' });
+  } catch (error) {
+    res.status(500).json({ message: 'Error while resetting the database.', error });
+  }
+};

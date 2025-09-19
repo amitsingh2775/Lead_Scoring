@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
-app.use("/api/v1/leads",leadRoutes)
+app.use("/api/v1",leadRoutes)
 app.get('/', (req, res) => {
   res.send('Lead Scoring API is running. Check /api/v1/... endpoints');
 });
